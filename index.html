@@ -10,8 +10,59 @@
   </head>
   <body>
 
+    <script type="text/javascript">
+
+
+
+
+      $(document).ready(function(){
+
+     // $.get('https://api.parse.com/1/classes/messages', {order:'-createdAt'}, function(data){
+     //   $.each(data.results, function(index){
+     //     textDisplay(JSON.stringify(data.results[index].username));
+     //     textDisplay(JSON.stringify(data.results[index].text));
+     //   });
+     // });
+
+      $.get('https://api.parse.com/1/classes/messages', {order:'-createdAt'}, function(data){
+        $.each(data.results, function(index){
+          var element = $('<p></p>').text(data.results[index].username + ': ' + data.results[index].text)
+           $('#messages').append(element);
+        });
+      });
+
+     var message = {
+     username: 'HR',
+     text: 'YOYO'
+     };
+
+     $.ajax("https://api.parse.com/1/classes/messages", {
+       type: 'post',
+       contentType: 'application/json',
+       data: JSON.stringify(message),
+       success: function(data){
+        $('#messages').append('<p>' + message.username + ': ' + message.text + '</p>');
+        console.log("Posting to Server");
+       },
+       error: function(data) {
+         console.log('Ajax request failed again', data);
+       }
+
+     });
+
+
+
+      });
+
+
+
+    </script>
+
     <div id="main">
       <h1>Chat with JSON!</h1>
+      <input class="draft" type="text"/><button class="send">Send</button>
+      <br>
+      <div id="messages"></div>
     </div>
 
   </body>
