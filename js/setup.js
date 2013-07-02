@@ -1,10 +1,17 @@
+var user = {};
+
 if(!/(&|\?)username=/.test(window.location.search)){
   var newSearch = window.location.search;
   if(newSearch !== '' & newSearch !== '?'){
     newSearch += '&';
   }
-  newSearch += 'username=' + (prompt('What is your name?') || 'anonymous');
+  newSearch += 'username=';
+  user.name = prompt('What is your name?') || 'anonymous';
+  newSearch += user.name;
   window.location.search = newSearch;
+  // var userName = newSearch;
+} else {
+  user.name = window.location.search.replace(/^\?username=/, '');
 }
 
 // Don't worry about this code, it will ensure that your ajax calls are allowed by the browser
