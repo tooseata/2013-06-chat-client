@@ -4,11 +4,11 @@ $(document).ready(function(){
 var refresh = function(){
 $.get('https://api.parse.com/1/classes/messages', {limit:'100', order:'-createdAt'}, function(data){
           $.each(data.results, function(index){
-            var userName = $('<a src="#" class="userName"></a>').text(data.results[index].username);
-            var message = $('<span></span>').text(data.results[index].text);
-            var element = $('<p class="userlist"></p>').append(userName.add(message));
+            var $userName = $('<a src="#" class="userName"></a>').text(data.results[index].username);
+            var $message = $('<span></span>').text(data.results[index].text);
+            var $element = $('<p class="userlist"></p>').append($userName.add($message));
             console.log(data);
-            $('#messages').after(element);
+            $('#messages').after($element);
           });
         });
 };
@@ -16,15 +16,15 @@ $.get('https://api.parse.com/1/classes/messages', {limit:'100', order:'-createdA
   setTimeout(refresh, 1000);
 
   // var refreshFriends = function(){
-  //   _.each(user.friends, function(index){
-  //     if(user.friends['index']){
-  //       var removeUsr = $(user.friends['index']);
-  //       // $('#friends').
-  //     }
+  //   _.each(user.friends, function(key, value){
+  //     // $('#friends').append()
   //   });
+
+  //    var friendListName = $(value).selector;
   // };
 
-  user.friends = {};
+  user.friends = {
+  };
 
   $('.send').on('click', function() {
     var message_value = $('#message').val();
@@ -38,10 +38,10 @@ $.get('https://api.parse.com/1/classes/messages', {limit:'100', order:'-createdA
       contentType: 'application/json',
       data: JSON.stringify(objectToPost),
       success: function(data) {
-      var userName = $('<a src="#" class="userName"></a>').text(user.name);
-      var message = $('<span></span>').text(message_value);
-      var element = $('<p class="userlist"></p>').append(userName.add(message));
-      $('#messages').append(element);
+      var $userName = $('<a src="#" class="userName"></a>').text(user.name);
+      var $message = $('<span></span>').text(message_value);
+      var $element = $('<p class="userlist"></p>').append($userName.add($message));
+      $('#messages').append($element);
       console.log("Posting to Server");
       console.log(objectToPost);
     },
@@ -54,13 +54,13 @@ $.get('https://api.parse.com/1/classes/messages', {limit:'100', order:'-createdA
 
   $('body').on("click", ".userName", function(e){
     e.preventDefault();
-    console.log("Clicked Friends");
     var clickedUserName = $(this).text();
     if (user.friends[clickedUserName]) {
+      $('.friends #'+clickedUserName).remove();
       delete user.friends[clickedUserName];
     } else {
+      $('.friends').prepend('<div id="' + clickedUserName + '">' + clickedUserName + '</div>');
       user.friends[clickedUserName] = true;
-
     }
   });
 
