@@ -50,7 +50,7 @@ $.get('https://api.parse.com/1/classes/messages', {limit:'100', order:'-createdA
       $('.friends #'+uniqueId).remove();
       delete user.friends[uniqueId];
     } else {
-      $('.friends').prepend('<div id="' + uniqueId + '">' + uniqueId.replace(/-/, ' ') + '</div>');
+      $('.friends').prepend('<div class="alert alert-info" id="' + uniqueId + '">' + uniqueId.replace(/-/, ' ') + '</div>');
       user.friends[uniqueId] = true;
     }
   });

@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title>Chat with JSON!</title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/styles.css">
+    <!-- <link rel="stylesheet" href="css/reset.css"> -->
+    <!--<link rel="stylesheet" href="css/styles.css"> -->
+    <link rel="stylesheet" href="http://bootswatch.com/amelia/bootstrap.min.css"></style>
     <script src="vendor/jquery/jquery-1.9.1.js"></script>
     <script src="js/setup.js"></script>
     <script src="js/scripts.js"></script>
@@ -12,12 +13,27 @@
   </head>
   <body>
 
-    <div id="main">
-      <h1>Chat with JSON!</h1>
-      <input id="message" type="text"/><button class="send">Send</button>
-      <br>
-      <div class="friends"></div>
-      <div id="messages"></div>
+
+<div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <h2>Talk To Friends</h2>
+            <textarea id="message" type="text" rows="3"></textarea>
+            <p><a href="#" class="btn btn-primary btn-large send">Send</a></p>
+            <h2>Your Friends</h2>
+            <div class="friends"></div>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+          <div class="hero-unit">
+            <h1>Chat Client</h1>
+            <div id="messages"></div>
+          </div>
+          </div><!--/row-->
+        </div><!--/span-->
+      </div><!--/row-->
+      <hr>
     </div>
 
   </body>
