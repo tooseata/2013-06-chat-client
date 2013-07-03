@@ -14,15 +14,6 @@ $.get('https://api.parse.com/1/classes/messages', {limit:'100', order:'-createdA
 };
 
   setTimeout(refresh, 1000);
-
-  // var refreshFriends = function(){
-  //   _.each(user.friends, function(key, value){
-  //     // $('#friends').append()
-  //   });
-
-  //    var friendListName = $(value).selector;
-  // };
-
   user.friends = {
   };
 
@@ -54,13 +45,13 @@ $.get('https://api.parse.com/1/classes/messages', {limit:'100', order:'-createdA
 
   $('body').on("click", ".userName", function(e){
     e.preventDefault();
-    var clickedUserName = $(this).text();
-    if (user.friends[clickedUserName]) {
-      $('.friends #'+clickedUserName).remove();
-      delete user.friends[clickedUserName];
+    var uniqueId = $(this).text().replace(/\s/, '-');
+    if (user.friends[uniqueId]) {
+      $('.friends #'+uniqueId).remove();
+      delete user.friends[uniqueId];
     } else {
-      $('.friends').prepend('<div id="' + clickedUserName + '">' + clickedUserName + '</div>');
-      user.friends[clickedUserName] = true;
+      $('.friends').prepend('<div id="' + uniqueId + '">' + uniqueId.replace(/-/, ' ') + '</div>');
+      user.friends[uniqueId] = true;
     }
   });
 
